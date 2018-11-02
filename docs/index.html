@@ -8,6 +8,7 @@
 <meta name="author" content="ytyaru">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="setup.js" charset="UTF-8"></script>
 <!--[if lt IE 9]>
 <script src="//cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -16,7 +17,48 @@
 </head>
 <body>
 
+<form id="SourceForm">
+<fieldset>
+<legend>電源</legend>
+	<input id="SourceVoltage" value="3.3" step="0.1" min="0" max="999.9" size="3" maxlength="3" required type="number" placeholder="電源電圧" autocomplete="on" list="SourceVoltageList"></input>
+	<small><label for="Voltage" title="Voltage(ボルト。1個あたりの電源における電圧)">V/個</label></small>
+	<label title="掛け算、乗算、乗法">×</label>
+	<input id="SourceNumber" value="1" type="number" min="1" max="99" size="2" maxlength="2" required placeholder="電源数" autocomplete="on" list="SourceNumberList"></input>
+	<small><label for="SourceNumber" title="電池や電源の個数">個</label></small>
+	<label title="イコール">＝</label>
+	<strong><output id="AllSourceVoltage" title="全個の電源を直列したときの電圧">0</output></strong>
+	<small><label for="AllSourceVoltage" title="全個の電源を直列したときの電圧">V</label></small>
+</fieldset>
+</form>
 
+<datalist id="SourceVoltageList">
+	<option value="0.9" label="電池[過放電]">0.9</option>
+	<option value="1.2" label="二次電池(ニッケル水素)">1.2</option>
+	<option value="1.5" label="一次電池(マンガン,アルカリ)">1.5</option>
+	<option value="3.0" label="一次ボタン電池">3.0</option>
+	<option value="3.3" label="Arduino,RaspberryPi">3.3</option>
+	<option value="3.6" label="リチウムイオン二次電池(公称電圧)">3.6</option>
+	<option value="2.7" label="リチウムイオン二次電池[過放電]">2.7</option>
+	<option value="4.2" label="リチウムイオン二次電池[過充電]">4.2</option>
+	<option value="5.0" label="USB給電,Arduino,RaspberryPi">5.0</option>
+	<option value="9.0" label="一次電池(積層)">9.0</option>
+	<option value="12.0" label="車用バッテリー">12.0</option>
+	<option value="24.0" label="車用バッテリー">24.0</option>
+</datalist>
+<datalist id="SourceNumberList">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+</datalist>
 
 </body>
 </html>
