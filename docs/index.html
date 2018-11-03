@@ -62,10 +62,10 @@
 
 <form id="RegisterForm">
 <fieldset><legend>抵抗器</legend>
-	<input id="RegisterOhm" value="4.7" step="0.1" min="0" max="9.9" required type="number" placeholder="E24系抵抗値" autocomplete="on" list="RegisterE24List"></input>
+	<input id="RegisterOhm" value="1.0" step="0.1" min="0" max="9.9" required type="number" placeholder="E24系抵抗値" autocomplete="on" list="RegisterE24List"></input>
 	<label title="掛け算、乗算、乗法">×</label>
 	<label title="底">10</label>
-	<input id="RegisterExponential" value="1" type="number" min="0" max="9" size="1" maxlength="1" required placeholder="指数" title="指数" autocomplete="on" list="RegisterExponentialList"></input>
+	<input id="RegisterExponential" value="2" type="number" min="0" max="9" size="1" maxlength="1" required placeholder="指数" title="指数" autocomplete="on" list="RegisterExponentialList"></input>
 	<label title="イコール">＝</label>
 	<strong><output id="RegisterValue" title="抵抗値">0</output></strong>
 	<small><label for="RegisterValue" title="Ohm(オーム。抵抗値の単位)">Ω</label></small>
@@ -116,7 +116,7 @@
 <fieldset><legend>LED</legend>
 <fieldset><legend>順方向</legend>
 <fieldset><legend>特性</legend>
-	<input id="LEDForwardVoltage" value="3.4" step="0.1" min="0" max="9.9" size="3" maxlength="3" required type="number" placeholder="順方向電圧(VF)" title="順方向電圧(VF)"></input>
+	<input id="LEDForwardVoltage" value="2.2" step="0.1" min="0" max="9.9" size="3" maxlength="3" required type="number" placeholder="順方向電圧(VF)" title="順方向電圧(VF)"></input>
 	<small><label for="LEDForwardVoltage" title="Voltage(ボルト。LEDの順方向電圧)">V</label></small>
 	<input id="LEDForwardIntensityOfCurrentNumber" value="20" type="number" min="1" max="99" size="2" maxlength="2" required placeholder="順方向電流(IF)" title="順方向電流(IF)"></input>
 	<small><label for="LEDForwardIntensityOfCurrentNumber" title="milli ampere(ミリアンペア)">mA</label></small>
@@ -129,7 +129,8 @@
 </fieldset>
 </form>
 
-<p>LEDに流れる電流: <strong><output id="LEDIntensity" title="LEDに流れる電流">0</output></strong> <small>mA</small></p>
+<p>LEDに流れる電流: <strong><output id="LEDIntensity" title="LEDに流れる電流">0</output></strong> <small>mA</small><br><span id="LEDState"></span></p>
+
 
 <details>
 <summary>計算</summary>

@@ -62,4 +62,21 @@ function CalcLEDIntensity() {
 		document.forms.RegisterForm.RegisterValue.value * 1000;
 	var target = document.getElementById("LEDIntensity");
 	target.value = LEDIntensity;
+	CalcLEDState();
+}
+// LED状態を計算する
+function CalcLEDState() {
+	var target = document.getElementById("LEDIntensity");
+	var LEDIntensity = target.value;
+	var states = ["Breakdown", "Deterioration", "NotLighting", "Lighting"];
+	var state = null;
+
+	var target = document.getElementById("LEDState");
+	// LED素子破壊（最大定格電流超過）
+	if (Number(document.forms.LEDForm.LEDMaxForwardIntensityOfCurrentNumber.value) <= LEDIntensity) { target.innerHTML = "LED素子破壊（最大定格電流超過）"; target.style = "color:#FF0000";}
+	// LED素子劣化（順電流超過）
+	else if (Number(document.forms.LEDForm.LEDForwardIntensityOfCurrentNumber.value) <= LEDIntensity) { target.innerHTML = "LED素子劣化（順電流超過）"; target.style = "color:#FFFF00";}
+	// LED点灯せず（電源電圧が順電圧より低い）
+	else if (Number(document.forms.SourceForm.AllSourceVoltage.value) <= Number(document.forms.LEDForm.LEDForwardVoltage.value)) { target.innerHTML = "LED点灯せず（電源電圧が順電圧より低い）"; target.style = "color:#444444";}
+	else { target.innerHTML = "LED点灯！"; target.style = "color:#00FF00";}
 }
