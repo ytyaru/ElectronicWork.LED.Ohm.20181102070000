@@ -2,9 +2,9 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>抵抗算出(LED1個をDC電源で点灯時)</title>
+<title>LED1個をDC電源で点灯するときの電流シミュレータ</title>
 <meta charset="utf-8">
-<meta name="description" content="直流電源にてLED1個を点灯するときの抵抗値を求める。">
+<meta name="description" content="直流電源、直流回路にてLED1個を点灯するシミュレータ。LEDへの電流を算出する。">
 <meta name="author" content="ytyaru">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
@@ -59,6 +59,144 @@
 	<option value="11">11</option>
 	<option value="12">12</option>
 </datalist>
+
+<form id="RegisterForm">
+<fieldset><legend>抵抗器</legend>
+	<input id="RegisterOhm" value="4.7" step="0.1" min="0" max="9.9" required type="number" placeholder="E24系抵抗値" autocomplete="on" list="RegisterE24List"></input>
+	<label title="掛け算、乗算、乗法">×</label>
+	<label title="底">10</label>
+	<input id="RegisterExponential" value="1" type="number" min="1" max="9" size="1" maxlength="1" required placeholder="指数" title="指数" autocomplete="on" list="RegisterExponentialList"></input>
+	<label title="イコール">＝</label>
+	<strong><output id="RegisterValue" title="抵抗値">0</output></strong>
+	<small><label for="RegisterValue" title="Ohm(オーム。抵抗値の単位)">Ω</label></small>
+</fieldset>
+</form>
+
+<datalist id="RegisterE24List">
+	<option value="1.0">1.0</option>
+	<option value="1.1">1.1</option>
+	<option value="1.2">1.2</option>
+	<option value="1.3">1.3</option>
+	<option value="1.5">1.5</option>
+	<option value="1.6">1.6</option>
+	<option value="1.8">1.8</option>
+	<option value="2.0">2.0</option>
+	<option value="2.2">2.2</option>
+	<option value="2.4">2.4</option>
+	<option value="2.7">2.7</option>
+	<option value="3.0">3.0</option>
+	<option value="3.3">3.3</option>
+	<option value="3.6">3.6</option>
+	<option value="3.9">3.9</option>
+	<option value="4.3">4.3</option>
+	<option value="4.7">4.7</option>
+	<option value="5.1">5.1</option>
+	<option value="5.6">5.6</option>
+	<option value="6.2">6.2</option>
+	<option value="6.8">6.8</option>
+	<option value="7.5">7.5</option>
+	<option value="8.2">8.2</option>
+	<option value="9.1">9.1</option>
+</datalist>
+<datalist id="RegisterExponentialList">
+	<option value="1">¹</option>
+	<option value="2">²</option>
+	<option value="3">³</option>
+	<option value="4">⁴</option>
+	<option value="5">⁵</option>
+	<option value="6">⁶</option>
+	<option value="7">⁷</option>
+	<option value="8">⁸</option>
+	<option value="9">⁹</option>
+</datalist>
+
+
+<form id="LEDForm">
+<fieldset><legend>LED</legend>
+<fieldset><legend>順方向</legend>
+<fieldset><legend>特性</legend>
+	<input id="LEDForwardVoltage" value="3.4" step="0.1" min="0" max="9.9" size="3" maxlength="3" required type="number" placeholder="順方向電圧(VF)" title="順方向電圧(VF)" autocomplete="on" list="SourceVoltageList"></input>
+	<small><label for="LEDForwardVoltage" title="Voltage(ボルト。LEDの順方向電圧)">V</label></small>
+	<input id="LEDForwardIntensityOfCurrentNumber" value="20" type="number" min="1" max="99" size="2" maxlength="2" required placeholder="順方向電流(IF)" title="順方向電流(IF)" autocomplete="on" list="SourceNumberList"></input>
+	<small><label for="LEDForwardIntensityOfCurrentNumber" title="milli ampere(ミリアンペア)">mA</label></small>
+</fieldset>
+<fieldset><legend>最大定格</legend>
+	<input id="LEDMaxForwardIntensityOfCurrentNumber" value="30" type="number" min="1" max="99" size="2" maxlength="2" required placeholder="順方向最大電流" title="順方向最大電流" autocomplete="on" list="SourceNumberList"></input>
+	<small><label for="LEDMaxForwardIntensityOfCurrentNumber" title="milli ampere(ミリアンペア)">mA</label></small>
+</fieldset>
+</fieldset>
+</fieldset>
+</form>
+
+<p>LEDに流れる電流: <strong><output id="LEDIntensity" title="LEDに流れる電流">0</output></strong> <small>mA</small></p>
+
+<details>
+<summary>計算</summary>
+
+<h1>概要</h1>
+
+<a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%A0%E3%81%AE%E6%B3%95%E5%89%87">オームの法則</a>
+
+<pre>
+電流＝電圧÷抵抗
+電流＝(電源電圧−LED順電圧)÷抵抗
+</pre>
+
+電流＝(<output name="AllSourceVoltage" title="全個の電源を直列したときの電圧">0</output>−<output name="LEDForwardVoltage" title="順方向電圧(VF)">0</output>)÷<output id="RegisterValue" title="抵抗値">0</output>
+
+<h2>詳細</h2>
+
+　1. <a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%A0%E3%81%AE%E6%B3%95%E5%89%87">オームの法則</a>を変形する（電流を求めるよう）。
+
+<pre>
+V = IR
+V = A * Ω
+電圧＝電流×抵抗
+電圧÷抵抗＝電流×抵抗÷抵抗
+電圧÷抵抗＝電流
+電流＝電圧÷抵抗
+</pre>
+
+　2. LEDに流れる電流は以下で求まる。
+
+<pre>
+電流＝(電源電圧−LED順電圧)÷抵抗
+</pre>
+
+　3. 数値を当てはめると以下。
+
+<p>LEDに流れる電流: <strong><output id="LEDIntensity" title="LEDに流れる電流">0</output></strong> <small>mA</small></p>
+
+<h2>例</h2>
+
+　電源電圧5.0V、LED順電圧3.4V、抵抗1100Ωのとき、LEDに流れる電流は以下。
+
+<pre>
+A = V / Ω
+A = (5.0 - 3.4) / 1100
+A = 1.6 / 1100
+A = 16/1100
+A = 0.01454545454
+mA = 0.01454545454 * 1000
+mA = 14.5
+</pre>
+
+<h2>おまけ</h2>
+
+　LEDの状態は以下のものがありうる。
+
+<pre>
+* LED破損
+	* 最大電圧超過
+	* 最大電流超過
+* LED劣化
+	* 順電流超過
+* LED点灯せず
+	* 電源電圧が順電圧より低い
+	* 抵抗値が高すぎて電流が流れない
+* LED点灯！
+</pre>
+</details>
 
 </body>
 </html>

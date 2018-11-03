@@ -1,6 +1,6 @@
 # このソフトウェアについて
 
-　直流電源にてLED1個を点灯するときの抵抗値を求める。
+　LED1個をDC電源で点灯するときの電流シミュレータ。
 
 * [demo](https://ytyaru.github.io/ElectronicWork.LED.Ohm.20181102070000/)
 
