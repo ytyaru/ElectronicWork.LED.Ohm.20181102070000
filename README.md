@@ -2,7 +2,7 @@
 
 　LED1個をDC電源で点灯するときの電流シミュレータ。
 
-* [demo](https://ytyaru.github.io/ElectronicWork.LED.Ohm.20181102070000/)
+* [demo](https://ytyaru.github.io/HTML.ElectronicWork.LED.Current.Simulator.20181102070000/)
 
 # ライセンス
 
