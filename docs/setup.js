@@ -68,8 +68,6 @@ function CalcLEDIntensity() {
 function CalcLEDState() {
 	var target = document.getElementById("LEDIntensity");
 	var LEDIntensity = target.value;
-	var states = ["Breakdown", "Deterioration", "NotLighting", "Lighting"];
-	var state = null;
 
 	var target = document.getElementById("LEDState");
 	// LED素子破壊（最大定格電流超過）
