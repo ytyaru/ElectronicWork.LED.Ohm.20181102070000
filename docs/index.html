@@ -65,7 +65,7 @@
 	<input id="RegisterOhm" value="4.7" step="0.1" min="0" max="9.9" required type="number" placeholder="E24系抵抗値" autocomplete="on" list="RegisterE24List"></input>
 	<label title="掛け算、乗算、乗法">×</label>
 	<label title="底">10</label>
-	<input id="RegisterExponential" value="1" type="number" min="1" max="9" size="1" maxlength="1" required placeholder="指数" title="指数" autocomplete="on" list="RegisterExponentialList"></input>
+	<input id="RegisterExponential" value="1" type="number" min="0" max="9" size="1" maxlength="1" required placeholder="指数" title="指数" autocomplete="on" list="RegisterExponentialList"></input>
 	<label title="イコール">＝</label>
 	<strong><output id="RegisterValue" title="抵抗値">0</output></strong>
 	<small><label for="RegisterValue" title="Ohm(オーム。抵抗値の単位)">Ω</label></small>
@@ -99,6 +99,7 @@
 	<option value="9.1">9.1</option>
 </datalist>
 <datalist id="RegisterExponentialList">
+	<option value="0">⁰</option>
 	<option value="1">¹</option>
 	<option value="2">²</option>
 	<option value="3">³</option>
